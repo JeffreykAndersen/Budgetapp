@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>VBS</title>
+</head>
+<body>
+<h1>Welcome to Visual Budget Saver</h1>
+<div class="container">
+    <div class="row">
+        <div class="col" id="register">
+            <form action="/register_user" method="POST">
+                {% csrf_token %}
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" id="first_name" class="form-control">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" id="last_name" class="form-control">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="form-control">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+                <input type="submit" value="Register">
+            </form>
+        </div>
+        <div class="col" id="log-in">
+            <form action="/log_in" method="POST">
+                {% csrf_token %}
+                <label for="user_email">Email:</label>
+                <input type="text" name="user_email" id="user_email" class="form-control">
+                <label for="user_password">Password:</label>
+                <input type="password" name="user_password" id="user_password" class="form-control">
+                <input type="submit" value="Log in">
+            </form>
+        </div>
+    </div>
+    {% if messages %}
+    <div class="mx-auto pad_these" style="width: 400px;"> 
+        <ul id="messages">
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor%}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

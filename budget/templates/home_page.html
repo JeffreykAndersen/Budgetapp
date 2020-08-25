@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script>
+      window.onload = function () {
+      
+      var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        data: [{
+          type: "doughnut",
+          startAngle: 60,
+          //innerRadius: 60,
+          indexLabelFontSize: 17,
+          indexLabel: "{label} - #percent%",
+          toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+          dataPoints: [
+            { y: 67, label: "{{logged_user.first_name|safe}}" },
+            { y: 28, label: "Field 2" },
+            { y: 10, label: "Field 3" },
+            { y: 7, label: "Field 4"},
+            { y: 15, label: "Field 5"},
+            { y: 6, label: "Field 6"}
+          ]
+        }]
+      });
+      chart.render();
+  
+      }
+      </script>
+    <title>VBS</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/home">Visualize, Budget, Save</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Unassigned link</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="log_out">Log Out</a>
+              </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Great {{logged_user.first_name}} you logged in</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="chartContainer"></div>
+            </div>
+         </div>     
+    </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
