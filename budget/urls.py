@@ -9,4 +9,7 @@ urlpatterns = [
     path('log_out', views.logout),
     # HOME PAGE
     path('home', views.home),
+    # EXPENSE AND INCOME
+    path('add_expense', views.add_expense),
+    path('add_income', views.add_income),
 ]

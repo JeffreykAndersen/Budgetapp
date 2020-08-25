@@ -22,7 +22,6 @@
             { y: 10, label: "Field 3" },
             { y: 7, label: "Field 4"},
             { y: 15, label: "Field 5"},
-            { y: 6, label: "Field 6"}
           ]
         }]
       });
@@ -53,12 +52,79 @@
         </div>
     </nav>
     <h1>Great {{logged_user.first_name}} you logged in</h1>
+    <div class="container">     
+        <div class="row">
+            <div class="col">
+                <h1>Add a Bill</h1>
+                <form action="/add_expense" method="POST">
+                {% csrf_token %}
+                    <label for="paid_to">Name of bill:</label>
+                    <input type="text" name="paid_to" id="paid_to" class="form-control">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" step="0.01" class="form-control">
+                    <label for="due_date">Date Due:</label>
+                    <input type="date" id="due_date" name="due_date" class="form-control">
+                    <input type="hidden" id="payer" name="payer" value="{{logged_user.id}}">
+                    <input type="submit">
+                </form>
+            </div>
+            <div class="col">
+                <h1>Add Your Income</h1>
+                <form action="/add_income" method="POST">
+                {% csrf_token %}
+                    <label for="in_amount">Amount:</label>
+                    <input type="number" id="in_amount" name="in_amount" step="0.01" class="form-control">
+                    <label for="deposit_date">Deposit Date:</label>
+                    <input type="date" id="deposit_date" name="deposit_date" class="form-control">
+                    <input type="hidden" id="user" name="user" value="{{logged_user.id}}">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+          <div  class="col" id="chartContainer"></div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <div id="chartContainer"></div>
+            <div class="col">
+                <table class="table table-striped mx-auto" style="width: 550px;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Bill:</th>
+                            <th>Amount:</th>
+                            <th>Due Date:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for expense in logged_user.expenses.all %}
+                        <tr>
+                            <td>{{expense.paid_to}}</td>
+                            <td>{{expense.amount}}</td>
+                            <td>{{expense.due_date}}</td>
+
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
             </div>
-         </div>     
+            <div class="col">
+                <table class="table table-striped mx-auto" style="width: 550px;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Bill:</th>
+                            <th>Amount:</th>
+                            <th>Due Date:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>

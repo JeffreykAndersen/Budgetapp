@@ -44,3 +44,22 @@ def home(request):
         'logged_user':User.objects.get(id=request.session['id'])
     }
     return render (request, 'home_page.html', context)
+
+# EXPENSE AND INCOME
+def add_expense(request):
+    if request.method == "POST":
+        errors = Expense.objects.validate(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+                print(key, value)
+            return redirect ('/home')
+        else:
+            Expense.objects.add_expense(request.POST)
+            return redirect('/home')
+
+
+def add_income (request):
+    if request.method == "POST":
+        Income.objects.add_income(request.POST)
+        return redirect('/home')
