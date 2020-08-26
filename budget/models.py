@@ -66,6 +66,7 @@ class ExpenseManager(models.Manager):
             paid_to = postData['paid_to'],
             amount = postData['amount'],
             due_date = postData['due_date'],
+            category = postData['category'],
             payer = User.objects.get(id=postData['payer'])
         )
 
@@ -83,6 +84,7 @@ class Expense(models.Model):
     amount = models.FloatField()
     payer = models.ForeignKey("User", related_name=("expenses"), on_delete=models.CASCADE)
     due_date = models.DateField()
+    category = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     objects = ExpenseManager()
@@ -91,6 +93,7 @@ class Income(models.Model):
     amount = models.FloatField()
     deposit_date = models.DateField()
     user = models.ForeignKey("User", related_name=("earner"), on_delete=models.CASCADE)
+    category = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     objects = IncomeManager()

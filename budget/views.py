@@ -36,12 +36,34 @@ def logout(request):
     request.session.flush()
     return redirect ('/')
 
+# MATH FOR HOME CHART CONTEXTS
+def totals(category):
+    this_total=0
+    for expense in Expense.objects.filter(category = category):
+        this_total += expense.amount
+    return this_total 
+
 # PAGES
 def home(request):
     if 'user' not in request.session:
         return redirect ('/')
+
+    total_auto = totals("Auto")
+    education = totals("Education")
+    entertainment = totals("Entertainment")
+    food = totals("Food")
+    home_total =totals("Home")
+    utilities = totals("Utilities")
+    other = totals("Other")
     context={
-        'logged_user':User.objects.get(id=request.session['id'])
+        'logged_user' : User.objects.get(id=request.session['id']),
+        'auto_total' : total_auto,
+        'education_total' : education,
+        'entertainment_total' : entertainment,
+        'food_total' : food,
+        'home_total' : home_total,
+        'utilities_total' : utilities,
+        'other_total' : other
     }
     return render (request, 'home_page.html', context)
 
