@@ -115,31 +115,16 @@
                     <tbody>
                       {% for expense in logged_user.expenses.all %}
                         <tr>
-                            <td{{expense.paid_to}}</td>
+                            <td>{{expense.paid_to}}</td>
                             <td>{{expense.amount}}</td>
                             <td>{{expense.category}}</td>
                             <td>{{expense.due_date}}</td>
-                        </tr>>
+                        </tr>
                       {% endfor %}
                     </tbody>
                 </table>
             </div>
-            <div class="col">
-                <table class="table table-striped mx-auto" style="width: 550px;">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Bill:</th>
-                            <th>Amount:</th>
-                            <th>Due Date:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+          </div>
       </div>
   </div>  
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
